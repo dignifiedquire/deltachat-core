@@ -12,7 +12,7 @@ all further options can be set using the set-command (type ? for help). */
 #include "../src/dc_context.h"
 #include "cmdline.h"
 #include "stress.h"
-
+#include "../../pgp/libpgp.h"
 
 /*******************************************************************************
  * Event Handler
@@ -225,8 +225,18 @@ int main(int argc, char ** argv)
 	}
 
 	s_do_log_info = 0;
-	stress_functions(context);
+	/*stress_functions(context);*/
 	s_do_log_info = 1;
+
+        /* dancing with the stars */
+
+        PublicOrSecret* key = rpgp_key_from_armor("-----BEGIN PGP PUBLIC KEY BLOCK-----\n\nmDMEWkN+5BYJKwYBBAHaRw8BAQdAIGqj23Kp273IPkgjwA7ue5MDIRAfWLYRqnFy\nc2AFMcC0EUxpZ2h0IDxsaWdodEBzdW4+iJAEExYIADgWIQSGS0GuVELT3Rs0woce\nzfAmwCRYMAUCWkN+5AIbAwULCQgHAgYVCAkKCwIEFgIDAQIeAQIXgAAKCRAezfAm\nwCRYMLteAQCFZcl8kBxCH86wmqpc2+KtEA8l/hsfh7jd+JWuyFuuRAD7BOix8Vo1\nP/hv8qUYwSn3IRXPeGXucoWVoKGgxRd+zAO4OARaQ37kEgorBgEEAZdVAQUBAQdA\nL1KkHCFxtK1CgvZlInT/y6OQeCfXiYzd/i452t2ZR2ADAQgHiHgEGBYIACAWIQSG\nS0GuVELT3Rs0wocezfAmwCRYMAUCWkN+5AIbDAAKCRAezfAmwCRYMJ71AQDmoQTg\n36pfjrl82srS6XPRJxl3r/6lpWGaNij0VptB2wEA2V10ifOhnwILCw1qBle6On7a\nBa257lrFM+cOSMaEsgo=\n=D8HS\n-----END PGP PUBLIC KEY BLOCK-----\n", 620);
+
+        char* key_id = rpgp_key_id(key);
+        printf("Key ID: %s\n", key_id);
+
+        /* --- */
+
 
 	printf("Delta Chat Core is awaiting your commands.\n");
 
@@ -323,4 +333,3 @@ int main(int argc, char ** argv)
 	context = NULL;
 	return 0;
 }
-
