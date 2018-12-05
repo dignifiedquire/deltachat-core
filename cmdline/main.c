@@ -238,7 +238,7 @@ int main(int argc, char ** argv)
         /* cleanup */
 
         rpgp_key_drop(key);
-        free(key_id);
+        rpgp_free_string(key_id);
 
         /* --- */
 
