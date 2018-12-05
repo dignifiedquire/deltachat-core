@@ -235,6 +235,11 @@ int main(int argc, char ** argv)
         char* key_id = rpgp_key_id(key);
         printf("Key ID: %s\n", key_id);
 
+        /* cleanup */
+
+        rpgp_key_drop(key);
+        free(key_id);
+
         /* --- */
 
 
